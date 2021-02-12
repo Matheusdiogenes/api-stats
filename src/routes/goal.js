@@ -1,16 +1,19 @@
 const router = require('express').Router()
 
-const goalController = require('../controllers/goal-controller')
+const goalHalfFull = require('../controllers/goal/halfFull')
+const goalOverUnder = require('../controllers/goal/overUnder')
+const goalBtts = require('../controllers/goal/bothTeamsToScore')
 
-router.get('/teamon', goalController.teamOn)
-router.get('/info', goalController.info)
-// router.get('/info/fulltime', controller)
-// router.get('/info/fulltime/:team/:latest', controller)
-// router.get('/info/halftime', controller)
-// router.get('/info/halftime/:team/:latest', controller)
-// router.get('/info/overunder/', controller)
-// router.get('/info/overunder/:team/:latest', controller)
-// router.get('/info/btts/', controller)
-// router.get('/info/btts/:team/:latest', controller)
+
+router.get('/fulltime', goalHalfFull.fullTime)
+router.get('/fulltime/:team/:latest', goalHalfFull.latestFT)
+router.get('/halftime', goalHalfFull.halftime)
+router.get('/halftime/:team/:latest', goalHalfFull.latestHT)
+router.get('/overunder/ft', goalOverUnder.OverUnderFT)
+router.get('/overunder/ft/:team/:latest', goalOverUnder.latestOverUnderFT)
+router.get('/overunder/ht', goalOverUnder.OverUnderHT)
+router.get('/overunder/ht/:team/:latest', goalOverUnder.latestOverUnderHT)
+router.get('/btts', goalBtts.btts)
+router.get('/btts/:team/:latest', goalBtts.latestBtts)
 
 module.exports = router
