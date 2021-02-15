@@ -4,6 +4,9 @@ const goalHalfFull = require('../controllers/goal/halfFull')
 const goalOverUnder = require('../controllers/goal/overUnder')
 const goalBtts = require('../controllers/goal/bothTeamsToScore')
 const goalInfo = require('../controllers/goal/info')
+router.get('/competitions') //mostra todas competições disponiveis
+router.get('/competitions/:competitionID') //mostra times da competição(ID)
+router.get('/competitions/:competitionID/:teamID') //mostra infomações do time(teamID)
 
 router.get('/fulltime', goalHalfFull.fullTime)
 router.get('/fulltime/:team/:latest', goalHalfFull.latestFT)
