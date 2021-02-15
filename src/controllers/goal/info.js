@@ -99,6 +99,27 @@ module.exports = {
       }     
       res.status(200).json(result.rows)
     })  
+  },
+
+  teams: (req, res) => {
+    const query = {
+      text: `
+      WITH geral as (
+        SELECT team_home as "team"
+        FROM "seriea_ita" 
+        union all
+        SELECT team_away
+        FROM "seriea_ita" 
+      )         
+        SELECT "team" FROM geral
+        GROUP BY "team"
+        ORDER BY "team"
+      `
+    }
+    pg.pool.query(query, (err, result) => {
+      if(err) throw err;
+      res.status(200).json(result.rows)
+    })
   }
 
 
