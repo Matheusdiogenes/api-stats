@@ -9,7 +9,7 @@ module.exports = {
       "away": ['team_away','away_ft', 'home_ft',  'away_ht', 'home_ht']
     }
     const result = await pg.pool.query({        
-      text: `SELECT ${op[domain][0]}, 
+      text: `SELECT ${op[domain][0]} AS "TEAM", 
                 COUNT(${op[domain][0]}) AS "MATCHE(S)",                
                 COUNT(CASE WHEN ${op[domain][1]} > ${op[domain][2]} THEN 1 END) AS "WIN", 
                 COUNT(CASE WHEN ${op[domain][1]} = ${op[domain][2]} THEN 1 END) AS "DRAW", 
@@ -39,7 +39,7 @@ module.exports = {
       "away": ['team_away','away_ft', 'home_ft',  'away_ht', 'home_ht']
     }
     const result = await pg.pool.query({        
-      text: `SELECT ${op[domain][0]}, 
+      text: `SELECT ${op[domain][0]} AS "TEAM", 
               COUNT(${op[domain][0]}) AS "MATCHE(S)", 
               SUM(${op[domain][1]}) AS "FOR FULLTIME", 
               SUM(${op[domain][2]}) AS "AGAINST FULLTIME", 
@@ -58,7 +58,7 @@ module.exports = {
       "away": ['team_away','away_ft', 'home_ft',  'away_ht', 'home_ht']
     }
     const result = await pg.pool.query({        
-      text: `SELECT ${op[domain][0]}, 
+      text: `SELECT ${op[domain][0]} AS 'TEAM', 
               COUNT(${op[domain][0]}) AS "MATCHE(S)", 
               SUM(${op[domain][1]}) AS "FOR FULLTIME", 
               SUM(${op[domain][2]}) AS "AGAINST FULLTIME", 
@@ -77,7 +77,7 @@ module.exports = {
       "away": ['team_away','corners_away_ft', 'corners_home_ft',  'corners_away_ht', 'corners_home_ht']
     }
     const result = await pg.pool.query({        
-      text: `SELECT ${op[domain][0]}, 
+      text: `SELECT ${op[domain][0]} AS "TEAM", 
               COUNT(${op[domain][0]}) AS "MATCHE(S)", 
               ROUND(AVG(${op[domain][1]}), 2) AS "FOR FULLTIME", 
               ROUND(AVG(${op[domain][2]}), 2) AS "AGAINST FULLTIME", 
@@ -100,7 +100,7 @@ module.exports = {
       "away": ['team_away','corners_away_ft', 'corners_home_ft',  'corners_away_ht', 'corners_home_ht']
     }
     const result = await pg.pool.query({        
-      text: `SELECT ${op[domain][0]}, 
+      text: `SELECT ${op[domain][0]} AS "TEAM", 
               COUNT(${op[domain][0]}) AS "MATCHE(S)", 
               ROUND(AVG(${op[domain][1]}), 2) AS "FOR FULLTIME", 
               ROUND(AVG(${op[domain][2]}), 2) AS "AGAINST FULLTIME", 
