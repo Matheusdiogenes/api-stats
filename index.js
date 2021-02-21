@@ -1,8 +1,8 @@
 const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
-const port = process.env.PORT || 8180
-const goalRoutes = require('./src/routes/goal')
+const info = require('./src/infoJson/info.json')
+const competitionRoutes = require('./src/routes/byDomainRouter')
 
 app.use(bodyParser.json())
 app.use(
@@ -11,12 +11,15 @@ app.use(
   })
 )
 
-app.get('/',(req, res) => {
-  res.json({ info: 'API STATS' })
+app.get('/api/league', (req, res) => {
+  const result = info.competition.map(ele => `Country: ${ele.country} - Leagues: ${ele.leagues.map(e => ` (${e.nome} -> ${e.leagueID})`)} `)
+  res.status(200).json(result)
+  
 })
 
-app.use('/api', goalRoutes)
+app.use('/api', competitionRoutes)
 
+const port = process.env.PORT || 8080
 app.listen(port, () => {
   console.log(`App running on port ${port}.`)
 })
