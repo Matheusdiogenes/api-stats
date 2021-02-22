@@ -10,6 +10,13 @@ app.use(
     extended: true,
   })
 )
+app.get('/', (req, res) => {
+  const result = 'welcome to FOOTBALL BET API'
+  res.status(200).json(result)
+  
+})
+
+
 
 app.get('/api/league', (req, res) => {
   const result = info.competition.map(ele => `Country: ${ele.country} - Leagues: ${ele.leagues.map(e => ` (${e.nome} -> ${e.leagueID})`)} `)
