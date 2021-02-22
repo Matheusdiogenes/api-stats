@@ -6,7 +6,7 @@ router.get('/info/:leagueID/:domain', byDomainController.infoDomain)
 router.get('/defense/:leagueID/:domain', byDomainController.defenseDomain) 
 router.get('/attack/:leagueID/:domain', byDomainController.attackDomain) 
 router.get('/corner/:leagueID/:domain', byDomainController.cornerDomain)
-router.get('/corner/:leagueID/:team/:domain/:matche', byDomainController.cornerDomainMatche)
+router.get('/corner/:leagueID/:domain/:team/:matche', byDomainController.cornerDomainMatche)
 
 
 module.exports = router
