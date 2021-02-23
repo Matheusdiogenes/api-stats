@@ -19,7 +19,7 @@ app.get('/', (req, res) => {
 
 
 app.get('/api/league', (req, res) => {
-  const result = info.competition.map(ele => `Country: ${ele.country} - Leagues: ${ele.leagues.map(e => ` (${e.nome} -> ${e.leagueID})`)} `)
+  const result = info.competition.map(ele => `Country: ${ele.country} - Leagues: ${ele.leagues.map(e => ` (${e.nome} -> ID: ${e.leagueID})`)}`)
   res.status(200).json(result)
   
 })
