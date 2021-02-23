@@ -2,7 +2,8 @@ const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
 const info = require('./src/infoJson/info.json')
-const competitionRoutes = require('./src/routes/byDomainRouter')
+const byDomainRoutes = require('./src/routes/byDomainRouter')
+const generalRoutes = require('./src/routes/generalRouter')
 
 app.use(bodyParser.json())
 app.use(
@@ -16,15 +17,14 @@ app.get('/', (req, res) => {
   
 })
 
-
-
 app.get('/api/league', (req, res) => {
   const result = info.competition.map(ele => `Country: ${ele.country} - Leagues: ${ele.leagues.map(e => ` (${e.nome} -> ID: ${e.leagueID})`)}`)
   res.status(200).json(result)
   
 })
 
-app.use('/api', competitionRoutes)
+app.use('/api/bydomain', byDomainRoutes)
+app.use('/api/general', generalRoutes)
 
 const port = process.env.PORT || 8080
 app.listen(port, () => {

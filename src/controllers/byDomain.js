@@ -110,8 +110,8 @@ module.exports = {
               ROUND(AVG(${op[domain][3]}), 1) AS "FOR HALFTIME", 
               ROUND(AVG(${op[domain][4]}), 1) AS "AGAINST HALFTIME",
               ROUND(AVG(${op[domain][1]} + ${op[domain][2]} ), 1) AS "AVERAGE TOTAL",
-              COUNT(CASE WHEN (${op[domain][1]} + ${op[domain][2]}) > 9 THEN 1 END) AS "GAMES WITH OVER 9.5",
-              COUNT(CASE WHEN (${op[domain][1]} + ${op[domain][2]}) > 10 THEN 1 END) AS "GAMES WITH OVER 10.5"
+              COUNT(CASE WHEN (${op[domain][1]} + ${op[domain][2]}) > 9 THEN 1 END) AS "OVER 9.5",
+              COUNT(CASE WHEN (${op[domain][1]} + ${op[domain][2]}) > 10 THEN 1 END) AS "OVER 10.5"
             FROM "${table}"
             WHERE lower(${op[domain][0]}) = '${team}'
                   AND game_date in (SELECT game_date FROM ${table} 
