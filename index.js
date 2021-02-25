@@ -1,10 +1,12 @@
 const express = require('express')
+const cors = require('cors')
 const app = express()
 const bodyParser = require('body-parser')
 const info = require('./src/infoJson/info.json')
 const byDomainRoutes = require('./src/routes/byDomainRouter')
 const generalRoutes = require('./src/routes/generalRouter')
 
+app.use(cors())
 app.use(bodyParser.json())
 app.use(
   bodyParser.urlencoded({
