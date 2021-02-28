@@ -1,0 +1,21 @@
+{
+  "g": "games",
+  "w":"win",
+  "d": "draw",
+  "l": "loss",
+  "at": "attack",
+  "de": "defense",
+  "at 1st": "attack halftime",
+  "de 1st": "defense halftime",  
+  "av. at": "average attack",
+  "av. de": "average defence",
+  "av. at 1st": "average attack halftime",
+  "av. de 1st": "average defense halftime",
+  "o. 0.5 1st": "Over 0.5 halftime",
+  "o. 1.5 ": "over 1.5",
+  "o. 2.5": "over 2.5",
+  "u. 1.5": "under 1.5",
+  "u. 2.5": "under 2.5",
+  "btts": "both teams to score"
+  
+}
