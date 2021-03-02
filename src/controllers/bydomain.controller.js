@@ -22,8 +22,6 @@ module.exports = {
             FROM "${table}" GROUP BY ${op[domain][0]} ORDER BY "team"`
     })
     res.status(200).json(result.rows)
-    // const data = result.rows 
-    // res.render('pages/index', {data: data, head: data[0]})
   },  
 
   cornerFull: async (req, res) => {
@@ -42,9 +40,7 @@ module.exports = {
             FROM "${table}"
             GROUP BY ${op[domain][0]} ORDER BY "team"`
     })    
-    res.status(200).json(result.rows)
-    // const data = result.rows    
-    // res.render('pages/index', {data: data, head: data[0]})
+    res.status(200).json(result.rows)    
   },  
 
   

@@ -1,6 +1,20 @@
 const pg = require('../database/pg')
 
 module.exports = {
+  team: async (req, res) => {
+    const table = req.params['leagueID'].replace('-', '_').toLowerCase()    
+    const result = await pg.pool.query({        
+      text: `WITH teams AS (
+        SELECT team_home AS "TEAM" FROM "${table}"
+        UNION ALL
+        SELECT team_away FROM "${table}"
+        )
+        SELECT "TEAM" FROM teams GROUP BY "TEAM" ORDER BY "TEAM";
+      `
+    })    
+    res.status(200).json(result.rows)
+  },
+
   goal: async (req, res) => {
     const table = req.params['leagueID'].replace('-', '_').toLowerCase()    
     const result = await pg.pool.query({        

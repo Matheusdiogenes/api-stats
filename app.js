@@ -14,8 +14,8 @@ app.get('/', (req, res) => {
   res.status(200).json(result)  
 })
 
-app.use('/api/bydomain', byDomainRoutes)
-app.use('/api/general', generalRoutes)
+app.use('/api', byDomainRoutes) 
+app.use('/api', generalRoutes)
 
 const port = process.env.PORT || 5500
 app.listen(port, () => {
