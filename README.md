@@ -1,3 +1,5 @@
+:warning: Em Manutenção
+
 # FOOTBALL-BET API
 
 API de estísticas de futebol dos melhores campeonatos do mundo.
