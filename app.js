@@ -2,7 +2,7 @@ const express = require('express')
 const cors = require('cors')
 const app = express()
 const bodyParser = require('body-parser')
-const byDomainRoutes = require('./src/routes/bydomain.router')
+const cornerRoutes = require('./src/routes/corner.router')
 const generalRoutes = require('./src/routes/general.router')
 
 app.use(cors())
@@ -14,7 +14,7 @@ app.get('/', (req, res) => {
   res.status(200).json(result)  
 })
 
-app.use('/api', byDomainRoutes) 
+app.use('/api', cornerRoutes) 
 app.use('/api', generalRoutes)
 
 const port = process.env.PORT || 5500

@@ -5,11 +5,11 @@ module.exports = {
     const table = req.params['leagueID'].replace('-', '_').toLowerCase()    
     const result = await pg.pool.query({        
       text: `WITH teams AS (
-        SELECT team_home AS "TEAM" FROM "${table}"
+        SELECT team_home AS "team" FROM "${table}"
         UNION ALL
         SELECT team_away FROM "${table}"
         )
-        SELECT "TEAM" FROM teams GROUP BY "TEAM" ORDER BY "TEAM";
+        SELECT "team" FROM teams GROUP BY "team" ORDER BY "team";
       `
     })    
     res.status(200).json(result.rows)
@@ -78,68 +78,5 @@ module.exports = {
     })    
     res.status(200).json(result.rows)
   },
-
-  corner: async (req, res) => {
-    const table = req.params['leagueID'].replace('-', '_').toLowerCase()    
-    const result = await pg.pool.query({        
-      text: `WITH corners AS (
-        SELECT game_date, team_home AS "TEAM", corners_home_ft AS "FOR", corners_away_ft AS "AGAINST",
-          corners_home_ht AS "FOR HT", corners_away_ht AS "AGAINST HT"
-        FROM "${table}"
-        UNION ALL
-        SELECT game_date, team_away, corners_away_ft, corners_home_ft, corners_away_ht, corners_home_ht
-        FROM "${table}"
-        )
-        SELECT "TEAM",
-          COUNT("TEAM") AS "MATCHE(S)",    
-          ROUND(AVG("FOR"), 1) AS "CORNERS SCORED",
-          ROUND(AVG("AGAINST"), 1) AS "CORNERS AGAINST",
-          ROUND(AVG("FOR HT"), 1) AS "CORNERS SCORED HALFTIME",
-          ROUND(AVG("AGAINST HT"), 1) AS "CORNERS AGAINST HALFTIME",
-          ROUND(AVG("AGAINST HT" + "FOR HT"), 1) AS "AVERAGE HALFTIME",
-          ROUND(AVG("AGAINST" + "FOR"), 1) AS "AVERAGE TOTAL",
-          COUNT(CASE WHEN ("FOR HT" + "AGAINST HT") > 3 THEN 1 END) AS "OVER 3.5 HALFTIME",
-          COUNT(CASE WHEN ("FOR" + "AGAINST") > 9 THEN 1 END) AS "OVER 9.5",
-          COUNT(CASE WHEN ("FOR" + "AGAINST") > 10 THEN 1 END) AS "OVER 10.5"
-        FROM corners  
-        GROUP BY "TEAM" ORDER BY "TEAM";
-      `
-    })    
-    res.status(200).json(result.rows)
-  },
-  cornerTeam: async (req, res) => {
-    const table = req.params['leagueID'].replace('-', '_').toLowerCase()    
-    const team = req.params['team'].replace('-', ' ').toLowerCase()
-    const matche = req.params['matche']
-    const result = await pg.pool.query({        
-      text: `WITH corners AS (
-        SELECT game_date, team_home AS "TEAM", corners_home_ft AS "FOR", corners_away_ft AS "AGAINST",
-          corners_home_ht AS "FOR HT", corners_away_ht AS "AGAINST HT"
-        FROM "${table}"
-        UNION ALL
-        SELECT game_date, team_away, corners_away_ft, corners_home_ft, corners_away_ht, corners_home_ht
-        FROM "${table}"
-        )
-        SELECT "TEAM",
-          COUNT("TEAM") AS "MATCHE(S)",    
-          ROUND(AVG("FOR"), 1) AS "CORNERS SCORED",
-          ROUND(AVG("AGAINST"), 1) AS "CORNERS AGAINST",
-          ROUND(AVG("FOR HT"), 1) AS "CORNERS SCORED HALFTIME",
-          ROUND(AVG("AGAINST HT"), 1) AS "CORNERS AGAINST HALFTIME",
-          ROUND(AVG("AGAINST HT" + "FOR HT"), 1) AS "AVERAGE HALFTIME",
-          ROUND(AVG("AGAINST" + "FOR"), 1) AS "AVERAGE TOTAL",
-          COUNT(CASE WHEN ("FOR HT" + "AGAINST HT") > 3 THEN 1 END) AS "OVER 3.5 HALFTIME",
-          COUNT(CASE WHEN ("FOR" + "AGAINST") > 9 THEN 1 END) AS "OVER 9.5",
-          COUNT(CASE WHEN ("FOR" + "AGAINST") > 10 THEN 1 END) AS "OVER 10.5"
-        FROM corners  
-        WHERE LOWER("TEAM") = '${team}' AND 
-          game_date IN (SELECT game_date FROM corners WHERE LOWER("TEAM") = '${team}' ORDER BY game_date DESC LIMIT ${matche})        
-        GROUP BY "TEAM" ORDER BY "TEAM";
-      `
-    })    
-    res.status(200).json(result.rows)
-  },
-
-
 
 }
