@@ -3,7 +3,7 @@ const cors = require('cors')
 const app = express()
 const bodyParser = require('body-parser')
 const cornerRoutes = require('./src/routes/corner.router')
-const generalRoutes = require('./src/routes/general.router')
+const usefulRoutes = require('./src/routes/useful.router')
 
 app.use(cors())
 app.use(bodyParser.json())
@@ -15,7 +15,7 @@ app.get('/', (req, res) => {
 })
 
 app.use('/api', cornerRoutes) 
-app.use('/api', generalRoutes)
+app.use('/api', usefulRoutes)
 
 const port = process.env.PORT || 5500
 app.listen(port, () => {
