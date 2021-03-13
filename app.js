@@ -14,6 +14,16 @@ app.get('/', (req, res) => {
   res.status(200).json(result)  
 })
 
+app.get('/api/league', (req, res) => {  
+  const result = {
+    italy: [
+      {name: 'Serie A TIM', leagueID: 'ita_sa'}
+    ]
+  }
+  res.status(200).json(result)  
+})
+
+
 app.use('/api', cornerRoutes) 
 app.use('/api', usefulRoutes)
 

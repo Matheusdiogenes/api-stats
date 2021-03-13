@@ -5,13 +5,14 @@ module.exports = {
     const team = req.params['team'].replace('-', ' ').toLowerCase()
     const table = req.params['leagueID'].replace('-', '_').toLowerCase()
     const domain = req.params['domain'].toLowerCase()
+    const matche = req.params['matche']
     const op = {
       "home": ['team_home', 'team_away', 'home_ft', 'away_ft', 'home_ht', 'away_ht', 'corners_home_ft', 'corners_away_ft','corners_home_ht', 'corners_away_ht'],
       "away": ['team_away', 'team_home', 'away_ft', 'home_ft', 'away_ht', 'home_ht', 'corners_away_ft', 'corners_home_ft','corners_away_ht', 'corners_home_ht']
     }
     const result = await pg.pool.query({        
       text: `SELECT ${op[domain][0]} AS "t1", 
-              ${op[domain][1]} AS "t2", 
+              ${op[domain][1]} AS "t2",
               ${op[domain][2]} AS "t1ft", 
               ${op[domain][3]} AS "t2ft", 
               ${op[domain][4]} AS "t1ht", 
@@ -21,7 +22,7 @@ module.exports = {
               ${op[domain][8]} AS "ct1ht", 
               ${op[domain][9]} AS "ct2ht"
             FROM "${table}"
-            WHERE LOWER(${op[domain][0]}) = LOWER('${team}') ORDER by game_date desc`
+            WHERE LOWER(${op[domain][0]}) = LOWER('${team}') ORDER BY game_date DESC LIMIT ${matche}`
     })    
     res.status(200).json(result.rows)
   },
