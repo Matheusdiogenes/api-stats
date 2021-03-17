@@ -17,7 +17,7 @@ app.get('/', (req, res) => {
 app.get('/api/league', (req, res) => {  
   const result = {
     italy: [
-      {name: 'Serie A TIM', leagueID: 'ita_sa'}
+      {name: 'Serie A TIM', leagueID: 'ita_sa'}      
     ]
   }
   res.status(200).json(result)  
@@ -27,7 +27,7 @@ app.get('/api/league', (req, res) => {
 app.use('/api', cornerRoutes) 
 app.use('/api', usefulRoutes)
 
-const port = process.env.PORT || 5500
+const port = process.env.PORT || 8080
 app.listen(port, () => {
   console.log(`App running: http://localhost:${port}/`)
 })
