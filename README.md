@@ -33,3 +33,5 @@ Para usar a API, utilize:
 |team| required | Nome da equipe. exemplo: ac-milan | string |
 |domain| required | Mando de campo. exemplo: home OU away | string |
 |matche| required | Número de jogos, começando do mais recente. | integer |
+
+:warning: API sendo reconstruída em outra branch.
