@@ -1,0 +1,31 @@
+{
+  "name": "corners-api",
+  "version": "1.0.0",
+  "description": "Uma api que fornece dados sobre futebol.",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Matheusdiogenes/api-stats.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Matheusdiogenes/api-stats/issues"
+  },
+  "homepage": "https://github.com/Matheusdiogenes/api-stats#readme",
+  "devDependencies": {    
+    "nodemon": "^2.0.7",
+    "sequelize-cli": "^6.2.0"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "pg": "^8.5.1",
+    "pg-hstore": "^2.3.3",
+    "sequelize": "^6.6.2"
+  }
+}
